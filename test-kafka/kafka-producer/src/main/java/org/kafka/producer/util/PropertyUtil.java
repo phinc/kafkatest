@@ -22,6 +22,10 @@ public class PropertyUtil {
 
     
     public Map<String, Object> getProperties(String prefix) {
+        if (null == prefix || prefix.trim().isEmpty()) {
+            prefix = "";
+        }
+        
         final Map<String, Object> properties = new HashMap<>();
         final List<org.springframework.core.env.PropertySource<?>> propertySources = ((AbstractEnvironment) environment).getPropertySources()
                 .stream()
