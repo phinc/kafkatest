@@ -48,14 +48,12 @@ public class PropertyUtilTest {
                 public boolean matches(Entry<String, Object> entry) {
                     return key.equals(entry.getKey()) && value.equals(entry.getValue().toString());
                 }
-        };
-        
+        };        
     }
     
 
     @Test(timeout = 1000L)
     public void testPropertyUtilWithNullPrefix() {
-
         assertNotNull(propertyUtil);
         assertThat(propertyUtil).isNotNull();
 
@@ -67,30 +65,37 @@ public class PropertyUtilTest {
     
     @Test
     public void testPropertyUtilWithBlankPrefix() {
-
         Map<String, Object> props = propertyUtil.getProperties("");
         assertThat(props).isNotNull().hasNoNullFieldsOrProperties()
             .containsEntry(BLANK_PREFIX_TEST_PROPERTY, BLANK_PREFIX_TEST_PROPERTY_VALUE)
             .containsEntry(KAFKA_TEST_PROPERTY, KAFKA_TEST_PROPERTY_VALUE);
     }
 
-
     @Test
     public void testPropertyUtilWithKafkaPrefix() {
-
         assertNotNull(propertyUtil);
         assertThat(propertyUtil).isNotNull();
 
         Map<String, Object> props = propertyUtil.getProperties(KAFKA_PROPERTY_PREFIX);
         assertThat(props).isNotNull().hasNoNullFieldsOrProperties().hasKeySatisfying(startsWithKafkaPrefix);
     }
-
-    
     
     @Test
-    public void testProperyUtilWithTestProperty() {
+    public void testPropertyUtilWithTestProperty() {
         Map<String, Object> props = propertyUtil.getProperties(KAFKA_PROPERTY_PREFIX);
         assertThat(props).hasEntrySatisfying(getMapEntryCondition(KAFKA_TEST_PROPERTY, KAFKA_TEST_PROPERTY_VALUE));
     }
     
+    @Test
+    public void testPropertyUtilWithSpacePrefix() {
+        Map<String, Object> props = propertyUtil.getProperties(" ");
+        assertThat(props).isNotNull().hasNoNullFieldsOrProperties()
+            .containsEntry(BLANK_PREFIX_TEST_PROPERTY, BLANK_PREFIX_TEST_PROPERTY_VALUE)
+            .containsEntry(KAFKA_TEST_PROPERTY, KAFKA_TEST_PROPERTY_VALUE);
+    }
+    
+    @Test
+    public void failedTest() {
+        assertThat(propertyUtil).isNull();
+    }
 }
