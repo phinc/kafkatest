@@ -94,8 +94,4 @@ public class PropertyUtilTest {
             .containsEntry(KAFKA_TEST_PROPERTY, KAFKA_TEST_PROPERTY_VALUE);
     }
     
-    @Test
-    public void failedTest() {
-        assertThat(propertyUtil).isNull();
-    }
 }
