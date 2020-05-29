@@ -4,13 +4,12 @@ orbs:
   maven: circleci/maven@0.0.12
   
 jobs:
-  run-junit-test:
-    build:
-      working_directory: ~/test-kafka
-      steps:
-        - run:  maven/test # checkout, build, test, and upload test results
+  build:
+    working_directory: ~/test-kafka
+    steps:
+      - maven/test # checkout, build, test, and upload test results
 
 workflows:
   run-junit-test:
     jobs:
-      - run-junit-test
+      - build
