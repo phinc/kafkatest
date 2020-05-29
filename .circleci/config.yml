@@ -8,4 +8,4 @@ workflows:
     jobs:
       - maven/test:
           app_src_directory: test-kafka
-          test_results_path: test-kafka/target/surefire-reports
+          test_results_path: test-kafka/kafka-producer/target/surefire-reports
